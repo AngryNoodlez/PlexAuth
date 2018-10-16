@@ -65,6 +65,10 @@
 		if($User->getAuth()){
 			// User is still logged in - show content
 			header('X-Username: ' . $User->getUsername(), true, 200);
+			
+                        include 'OmbiSSO.php';
+                        getOmbiToken();
+			
 			if (isset($_SESSION['return_url'])){
 				if ($_SESSION['return_url'] != ""){
 					$url = $GLOBALS['ini_array']['protocol'];
