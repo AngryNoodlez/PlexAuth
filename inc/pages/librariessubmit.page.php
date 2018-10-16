@@ -114,7 +114,7 @@
 				
 		<?php
 		   echo '<h3><center>You should be redirected in a moment..</center></h3>';
-           echo '<center><button class="btn tmmn-orange" onclick="window.location.href=\'/?page=libraries\'" name="goback"><i class="fa fa-spinner fa-spin"></i>&nbsp;Applying...</center>';
+           echo '<center><button class="btn plex-orange" onclick="window.location.href=\'/?page=libraries\'" name="goback"><i class="fa fa-spinner fa-spin"></i>&nbsp;Applying...</center>';
 		?>
 
         <body>
