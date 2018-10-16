@@ -5,6 +5,7 @@
 	
 	[PLEX_SERVER]
 	token = "YOUR PLEX TOKEN"; //Follow this guide to get your token. https://support.plex.tv/hc/en-us/articles/204059436-Finding-your-account-token-X-Plex-Token
+	server_id = "YOUR SERVER ID"; // Server ID, can be found using api - https://plex.tv/api/servers/?X-Plex-Token=YOURTOKENHERE
 	plexowner = "PLEX OWNERS USERNAME"; //Your Plex username. Not your email.
 	serverName = "PlexServerName"; // The name of your server. This is required to isolate which server a user has to be shared with for auth to be successful.
 	
