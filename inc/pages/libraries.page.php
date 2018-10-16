@@ -52,7 +52,7 @@
                         <!--  CSS  -->
                         <?php require_once 'inc/css.php'; ?>
 			<!--  get_plex_user  -->
-			<?php include '/usr/share/nginx/scripts/update_plex_user.php'; ?>
+			<?php include 'inc/update_plex_user.php'; ?>
 			
 			<?php
 			$Shares = update_plex_user($User->getUsername(), [], false);
