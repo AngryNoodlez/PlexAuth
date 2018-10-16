@@ -25,5 +25,9 @@
 	signout_return = https://secure.domain.com; //Location you will be returned to after you sign out.
 	checkServerName = true; // Check for a specific server when performing auth. Enabled or Disabled.
 	debug = false; //Debug on or off.
+
+        [OMBI_SSO]
+        enableOmbiSSO = true; // Ombi must be set to not require password to login.
+        ombiURL = "http://127.0.0.1:5000/ombi"; // No trailing slash
 	;*/
 ;?>
