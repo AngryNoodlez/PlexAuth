@@ -6,6 +6,7 @@
 			"Help & Support" => array (
                                         "FAQ" => array("https://getgrav.org/", false),
                                         "Helpdesk" => array("https://github.com/hjone72/Bumpy-Booby", true)
+                                        "Library Settings" => array(".?page=libraries", true)
                                         ),
 			"Features" => array (
                                         "Plex" => array("https://plex.tv", false),
