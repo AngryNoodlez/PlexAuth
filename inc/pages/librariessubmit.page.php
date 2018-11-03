@@ -42,13 +42,11 @@
         $NewShares = explode(', ', $NewShares);
 
 
-//	if(empty($NewShares['0'])) {
-//        update_plex_user($Username, [], true);
-//        } else {
-//        update_plex_user($Username, $NewShares, false);
-//        }
-
+	if(empty($NewShares['0'])) {
+        update_plex_user($Username, [], true);
+        } else {
         update_plex_user($Username, $NewShares, false);
+        }
    }
 
 ?>
