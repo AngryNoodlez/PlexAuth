@@ -55,7 +55,12 @@
 			<?php include 'inc/update_plex_user.php'; ?>
 			
 			<?php
-			$Shares = update_plex_user($User->getUsername(), [], false);
+                        if ($User->authURI('admin')) {
+                            $Username = 'admin';
+                        } else {
+                            $Username = $User->getUsername();
+                        }
+			$Shares = update_plex_user($Username, [], false);
 			$FormStart = '<div><form action="/?page=librariessubmit" method="POST">';
 			$FormEnd = '</form></div><br>';
 			?>
