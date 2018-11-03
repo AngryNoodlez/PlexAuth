@@ -87,7 +87,7 @@
                                 $share_xml = false;
                                 $share_xml = file_get_contents('https://plex.tv/api/servers/'.$server_id.'/shared_servers/'.$link_id.'?X-Plex-Token='.$token);
 
-                                // Extract Share IDs
+                                // Extract Share IDs if user has any shares
                                 if ($link_id)
                                 {
                                         if ($share_xml !== false)
@@ -117,9 +117,31 @@
                                                 return (array('ERROR_NO_SERVER'));;
                                         }
                                 } else {
-                                return null;
+                                    if ($login !== "admin") {
+                                    // If user has no shares, check if they're an admin. If not, present full list of shares
+                                    $share_list_xml  = false;    
+                                    $share_list_xml = file_get_contents('https://plex.tv/api/servers/'.$server_id.'/?X-Plex-Token='.$token);
+                                    $sections = explode('<Section id=', $share_list_xml);
+                            
+                                    $section_ids = array();
+                                    $section_ids_all = array();
+
+                                    foreach ($sections as $section) {
+                                        preg_match('/\"(\d+)\"\s.*type\=\"(\w+)\"\stitle\=\"(.*)\".*/', $section, $section_ids);
+                                        if($section_ids[1] != '') {
+                                            $section_ids_all[] = array(
+                                            'section' => $section_ids[1],
+                                            'title' => $section_ids[3],
+                                            'type' => $section_ids[2],
+                                            'shared' => '0',
+                                            );
+                                        }
+                                    }
+                                        return $section_ids_all;
+                                    } else {
+                                        return null;
+                                    }
                                 }
-                        }
                 }
 
                 // Edit / Add mode
