@@ -8,6 +8,7 @@
 		private $plexemail; //Plex email address
 		private $thumb; //Plex picture location
 		private $token; //Plex token
+		private $ombitoken; //Ombi Token
 		private $pin; //Plex pin. Don't know what to do with this yet. Maybe useful later.
 		private $auth = false; //If the user has been authenticated or not.
 		private $groups; //Array of uri's that the user can access.
@@ -18,6 +19,7 @@
 			$loginSuccess = false; //Will quickly finish creating the User if they fail to login correctly.
 			if ($username != null && $password != null) {
 				if ($this->getPlexToken($username, $password)){
+					$this->setOmbiToken($username, $password);
 					//Authenticated
 					$token = $this->token;
 					$loginSuccess = true;
@@ -174,6 +176,60 @@
 				return array($this->username, null, false);
 			}
 		}
+		
+                public function setOmbiToken($username, $password) {
+
+                        if ($GLOBALS['ini_array']['enableOmbiSSO'] == true) {
+
+                                // Set Ombi URL
+                                $OmbiURL = $GLOBALS['ini_array']['ombiURL'];
+
+                                // Set headers
+                                $data = array(
+                                                'username' => $username,
+                                                'password' => $password,
+                                                'rememberMe' => 'false'
+                                );
+
+                                // Encode array as JSON
+                                $payload = json_encode($data);
+
+                                // Prepare new cURL resource
+                                $ch = curl_init($OmbiURL . '/api/v1/Token');
+                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+                                curl_setopt($ch, CURLOPT_POST, true);
+                                curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+                                // Set HTTP Header for POST request
+                                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                                                'Content-Type: application/json',
+                                                'Accept: application/json')
+                                );
+
+                                // Submit the POST request
+                                $result = curl_exec($ch);
+
+                                // Close cURL session handle
+                                curl_close($ch);
+
+                                // Decode JSON
+                                $output = json_decode($result);
+
+                                //Sets the users Ombi Token
+                                $this->OmbiToken = $output->access_token;
+                                $_SESSION['ytbuser'] = serialize($this);
+                        }
+
+                }
+
+                public function getOmbiToken() {
+                        if (isset($this->OmbiToken)){
+                                return $this->OmbiToken;
+                        } else {
+                                return null;
+                        }
+                }
 		
 		function AuthUser($username)
 			{
