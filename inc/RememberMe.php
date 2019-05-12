@@ -66,8 +66,9 @@
 			// User is still logged in - show content
 			header('X-Username: ' . $User->getUsername(), true, 200);
 			
-                        include 'OmbiSSO.php';
-                        getOmbiToken();
+                        echo '<script>';
+                        echo 'localStorage.setItem("id_token", "' . $User->OmbiToken . '");';
+                        echo '</script>';
 			
 			if (isset($_SESSION['return_url'])){
 				if ($_SESSION['return_url'] != ""){
