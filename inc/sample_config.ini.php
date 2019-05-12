@@ -28,7 +28,7 @@
 	debug = false; //Debug on or off.
 
         [OMBI_SSO]
-        enableOmbiSSO = true; // Ombi must be set to not require password to login.
+        enableOmbiSSO = true; // Ombi must be set to require passwords.
         ombiURL = "http://127.0.0.1:5000/ombi"; // No trailing slash
 	;*/
 ;?>
